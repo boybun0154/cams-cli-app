@@ -1,6 +1,7 @@
 package cams.service;
 
 import cams.domain.Account;
+import cams.domain.Customer;
 import cams.repository.AccountDAO;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,14 +17,24 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> allAccounts() {
-        return accountDAO.findAll().stream()
+        List<Account> accounts = accountDAO.findAll();
+        for (Account account : accounts) {
+            Customer customer = customerService.getCustomerFromAcc(account);
+            account.setCustomer(customer);
+        }
+        return accounts.stream()
                 .sorted((a1, a2) -> Double.compare(a2.getBalance(), a1.getBalance()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Account> platinumTier() {
-        return accountDAO.findAll().stream()
+        List<Account> accounts = accountDAO.findAll();
+        for (Account account : accounts) {
+            Customer customer = customerService.getCustomerFromAcc(account);
+            account.setCustomer(customer);
+        }
+        return accounts.stream()
                 .filter(a -> "Platinum".equals(a.getTier()))
                 .collect(Collectors.toList());
     }

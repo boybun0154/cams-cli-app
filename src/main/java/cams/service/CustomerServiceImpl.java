@@ -1,8 +1,8 @@
 package cams.service;
 
+import cams.domain.Account;
 import cams.domain.Customer;
 import cams.repository.CustomerDAO;
-import java.util.Optional;
 
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerDAO customerDAO;
@@ -12,7 +12,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<Customer> getCustomerFromAcc(long customerId) {
-        return customerDAO.findById(customerId);
+    public Customer getCustomerFromAcc(Account account) {
+        if (account == null) {
+            return null;
+        }
+        return customerDAO.findById(account.getCustomerId()).orElse(null);
     }
 }

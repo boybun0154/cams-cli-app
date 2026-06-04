@@ -1,8 +1,8 @@
 package cams.service;
 
+import cams.domain.Account;
 import cams.domain.Customer;
-import java.util.Optional;
 
 public interface CustomerService {
-    Optional<Customer> getCustomerFromAcc(long customerId);
+    Customer getCustomerFromAcc(Account account);
 }

@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class CAMSApp {
     private static final CustomerDAO customerDAO = new InMemoryCustomerDAO();
-    private static final AccountDAO accountDAO = new InMemoryAccountDAO(customerDAO);
+    private static final AccountDAO accountDAO = new InMemoryAccountDAO();
     private static final CustomerService customerService = new CustomerServiceImpl(customerDAO);
     private static final AccountService accountService = new AccountServiceImpl(accountDAO, customerService);
 
@@ -35,10 +35,10 @@ public class CAMSApp {
 
             switch (input) {
                 case "1":
-                    displayAllAccounts();
+                    allAccounts();
                     break;
                 case "2":
-                    displayPlatinumAccounts();
+                    platinumTier();
                     break;
                 case "3":
                     System.out.println("Exiting CAMS Application. Goodbye!");
@@ -60,7 +60,7 @@ public class CAMSApp {
         System.out.println("==================================================");
     }
 
-    private static void displayAllAccounts() {
+    public static void allAccounts() {
         try {
             List<Account> accounts = accountService.allAccounts();
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(accounts);
@@ -75,7 +75,7 @@ public class CAMSApp {
         }
     }
 
-    private static void displayPlatinumAccounts() {
+    public static void platinumTier() {
         try {
             List<Account> accounts = accountService.platinumTier();
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(accounts);
