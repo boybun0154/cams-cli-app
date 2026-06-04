@@ -46,15 +46,3 @@ This opens the menu-driven CLI:
 ==================================================
 Enter your choice (1-3): 
 ```
-
-#### B. Command-Line Arguments Mode
-You can query lists directly by passing commands to bypass the interactive menu:
-
-*   **To display all accounts** (sorted by balance descending, with the bank's liquidity position at the bottom):
-    ```bash
-    java -jar target/cams-cli-app-1.0-SNAPSHOT.jar all
-    ```
-*   **To display only Platinum tier accounts**:
-    ```bash
-    java -jar target/cams-cli-app-1.0-SNAPSHOT.jar platinum
-    ```
