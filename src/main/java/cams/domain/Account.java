@@ -7,12 +7,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({ "accountId", "accountNumber", "accountType", "dateOpened", "balance", "tier", "customer" })
 public class Account {
-    private long accountId;
-    private String accountNumber;
-    private String accountType;
+    private final long accountId;
+    private final String accountNumber;
+    private final String accountType;
 
     @JsonIgnore
-    private LocalDate dateOpened;
+    private final LocalDate dateOpened;
 
     private double balance;
 
@@ -21,7 +21,13 @@ public class Account {
 
     private Customer customer;
 
-    public Account() {}
+    // No-arg constructor to satisfy basic POJO guidelines
+    public Account() {
+        this.accountId = 0;
+        this.accountNumber = "";
+        this.accountType = "";
+        this.dateOpened = null;
+    }
 
     public Account(long accountId, String accountNumber, String accountType, LocalDate dateOpened, double balance, long customerId) {
         this.accountId = accountId;
@@ -36,32 +42,16 @@ public class Account {
         return accountId;
     }
 
-    public void setAccountId(long accountId) {
-        this.accountId = accountId;
-    }
-
     public String getAccountNumber() {
         return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public String getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
-
     public LocalDate getDateOpened() {
         return dateOpened;
-    }
-
-    public void setDateOpened(LocalDate dateOpened) {
-        this.dateOpened = dateOpened;
     }
 
     @JsonProperty("dateOpened")
